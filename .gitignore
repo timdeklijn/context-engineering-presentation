@@ -1,0 +1,5 @@
+node_modules/
+result
+.envrc
+.direnv/
+slides.pdf
