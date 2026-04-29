@@ -4,6 +4,9 @@ OUTPUT := slides.pdf
 
 .PHONY: start export
 
+install:
+	npm install
+
 ## Start the dev server with live reload
 start:
 	node serve.js
