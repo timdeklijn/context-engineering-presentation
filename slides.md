@@ -8,10 +8,26 @@ Tim de Klijn, Willem Bressens
 
 ---
 
+## You've already felt this problem
+
+- You paste the same file into chat for the 10th time
+- The model ignores half of it
+- The response is confidently wrong
+
+That's a context problem.
+
+--
+
+### Are you in control of your context?
+
+What did you add? And what does your harness add for free?  
+Is all of it beneficial?
+
+---
+
 ## Definitions
 
 So we speak the same language
-
 
 --
 
@@ -37,72 +53,110 @@ The runtime that drives the agentic loop: Claude Code, Codex CLI, OpenCode, etc.
 
 Reuse of previously computed KV-cache entries to avoid re-processing unchanged prefix tokens.
 
+```
+Without cache:   [system][history][tools][new prompt]  ← re-processed every time
+With cache:      [system][history][tools] ✓  +  [new prompt]  ← only new tokens processed
+```
+
 --
 
 ### Context Engineering
 
 Designing and controlling the context that is fed to the model at each step.
 
+---
+
+## Why does it matter?
+
+- **Garbage in, garbage out** — model quality is bounded by context quality
+- **Token limits** force trade-offs: what to include, what to leave out
+- **Cost** — every token processed costs money; noise is waste
+- **Reproducibility** — same context → consistent results
+
+---
+
+## Anatomy of a context window
+
+Everything the model sees, in layers:
+
+```
+┌─────────────────────────────────────┐
+│  System Prompt                      │  ← set by harness or you
+├─────────────────────────────────────┤
+│  Memory Files (AGENTS.md, etc.)     │  ← long-term context you control
+├─────────────────────────────────────┤
+│  Conversation History               │  ← grows every turn
+├─────────────────────────────────────┤
+│  Tool Results                       │  ← can be very large
+├─────────────────────────────────────┤
+│  Agent / Harness Injections         │  ← added automatically
+├─────────────────────────────────────┤
+│  Your current prompt                │
+└─────────────────────────────────────┘
+```
+
+Understanding this map is the foundation of context engineering.
+
+---
+
+## What shapes your context?
+
 --
 
-## Why?
+### Things your harness adds
 
-- Garbage in, garbage out
-- Focussed context will improve output
-- Token limits force trade-offs: what to include, what to leave out
-- Reproducibility: same context → consistent results
+Prompt injections, system prompts, tool call scaffolding — automatically, whether you asked or not.
+
+Know what your harness puts in before you blame the model.
+
+--
+
+### Compacting (OpenCode)
+
+When the context window fills up, the harness has to make decisions:
+
+- **auto:** Automatically compact the session when context is full **(default: true)**
+- **prune:** Remove old tool outputs to save tokens **(default: true)**
+- **reserved:** Token buffer for compaction — avoids overflow mid-session
+
+Compaction is context engineering on autopilot. You can tune it, but you should understand when it fires.
 
 ---
 
-## Are you in control of your context?
+## What you can control
 
-What did you add? And what do you get for free? Is it benificial?
-
----
+--
 
 ## Memory
 
 --
 
-## Short Term Memory
+### Short-Term Memory
 
-Everything that lives inside your session.
+Everything that lives inside your current session.  
+Grows automatically. Can be pruned by compaction.
 
 --
 
-## Long Term Memory
+### Long-Term Memory
 
 Everything that outlives a session:
 
-- Markdown files: decisions, architecture, todo's
-- vector/graph DB's
+- **Markdown files** — decisions, architecture, todos (`AGENTS.md`, `CLAUDE.md`)
+- **Vector / graph DBs** — semantic retrieval at scale
 
----
+This is context you *deliberately* place in front of the model every time.
 
-## What does your harness add?
-
-Prompt injections, system prompt, tool calls?
-
----
-
-## Compacting?
-
-Opencode:
-
-- **auto:** Automatically compact the session when context is full **(default: true)**.
-- **prune:** Remove old tool outputs to save tokens **(default: true)**.
-- **reserved:** Token buffer for compaction. Leaves enough window to avoid overflow during compaction
-
----
+--
 
 ## Skills
 
 <small>In `~/.claude/skills/explain-code/SKILL.md`:</small>
 
 ```md
--​--
+---
 description: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks "how does this work?"
--​--
+---
 
 When explaining code, always include:
 
@@ -116,7 +170,7 @@ Keep explanations conversational. For complex concepts, use multiple analogies.
 
 <small>https://code.claude.com/docs/en/skills</small>
 
----
+--
 
 ## MCP
 
@@ -126,32 +180,40 @@ Keep explanations conversational. For complex concepts, use multiple analogies.
 
 ---
 
+## See it in action
+
+Sub-agent demo:
+
+- Multiple agents running in parallel, each with a scoped context
+- Watch how what each agent *sees* determines what it *does*
+- The harness coordinates — but you designed the context
+
+---
+
 ## Review your context
 
-opencode:
+Don't guess — inspect.
 
-``` sh
+OpenCode:
+
+```sh
 /export
 ```
 
----
-
-## Sub Agents
-
-Demo: tmux agent?
-
-```
-pi tmux
-```
+Look for:
+- Repeated information
+- Large tool outputs that are no longer relevant
+- Harness injections you didn't expect
 
 ---
 
-## Cave Man Speak
+## One thing to do on Monday
 
+Open your next session. Run `/export`.  
+Look at what's actually in your context window.
 
-> ...the caveman approach treats LLM output as a "lossy compression" problem, where the core information is preserved while the "filler" is discarded...
+Ask yourself: **would I have written this prompt myself?**
 
-<small>Someone at LinkedIn</small>
----
+--
 
 ### Questions?
