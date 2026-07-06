@@ -6,7 +6,7 @@
     <title>Context Engineering</title>
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reset.css" />
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css" />
-    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css" />
+    <link rel="stylesheet" href="thisworkz.css" />
     <link rel="stylesheet" href="node_modules/reveal.js/dist/plugin/highlight/monokai.css" />
   </head>
   <body>
@@ -28,13 +28,19 @@
     <script>
       Reveal.initialize({
         hash: true,
+        slideNumber: 'c/t',
+        progress: true,
+        transition: 'fade',
+        transitionSpeed: 'fast',
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
     </script>
     <script>
-      // Live reload
-      const evtSource = new EventSource('/__reload');
-      evtSource.onmessage = () => location.reload();
+      // Live reload (skip when exporting to PDF)
+      if (!new URLSearchParams(location.search).has('export')) {
+        const evtSource = new EventSource('/__reload');
+        evtSource.onmessage = () => location.reload();
+      }
     </script>
   </body>
 </html>

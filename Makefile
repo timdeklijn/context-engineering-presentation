@@ -15,5 +15,5 @@ start:
 export:
 	@echo "Exporting slides to $(OUTPUT)..."
 	@echo "Make sure the dev server is running (make start) in another terminal."
-	npx decktape reveal "$(URL)" "$(OUTPUT)"
+	npx decktape reveal "$(URL)?export" "$(OUTPUT)"
 	@echo "Done → $(OUTPUT)"

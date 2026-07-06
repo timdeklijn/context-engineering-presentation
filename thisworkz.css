@@ -1,0 +1,263 @@
+/*
+ * Thisworkz Reveal.js Theme
+ * Brand palette: dark navy, cream, warm gold, teal
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;900&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --bg-deep:    #0c182b;
+  --bg-mid:     #1b345e;
+  --cream:      #fbf7f1;
+  --gold:       #2eb8c8;
+  --teal:       #086376;
+  --muted:      rgba(251,247,241,0.45);
+  --code-bg:    rgba(27,52,94,0.7);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+.reveal-viewport {
+  background: var(--bg-deep);
+}
+
+.reveal {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--cream);
+}
+
+/* ── Slides ────────────────────────────────────────────────────────────────── */
+.reveal .slides section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 2rem 3rem;
+}
+
+/* ── Headings ──────────────────────────────────────────────────────────────── */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-transform: none;
+  margin-bottom: 0.5em;
+}
+
+.reveal h1 { font-size: 2.4em; font-weight: 900; }
+.reveal h2 { font-size: 1.9em; font-weight: 700; }
+.reveal h3 { font-size: 1.4em; font-weight: 600; color: var(--gold); }
+.reveal h4 { font-size: 1em;   font-weight: 400; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ── Gold accent line under h2 on title slides ─────────────────────────────── */
+.reveal .slides > section:first-child h1::after,
+.reveal .slides > section:first-child h2::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background: var(--gold);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* ── Body text ─────────────────────────────────────────────────────────────── */
+.reveal p {
+  color: var(--cream);
+  line-height: 1.6;
+  margin: 0.4em 0;
+}
+
+/* ── Lists ─────────────────────────────────────────────────────────────────── */
+.reveal ul,
+.reveal ol {
+  text-align: left;
+  margin: 0.4em 0 0.4em 1.2em;
+}
+
+.reveal li {
+  margin: 0.35em 0;
+  line-height: 1.5;
+  color: var(--cream);
+}
+
+/* ── Blockquotes ───────────────────────────────────────────────────────────── */
+.reveal blockquote {
+  background: rgba(27,52,94,0.55);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: 0.8em 1.4em;
+  font-style: italic;
+  color: var(--cream);
+  width: 90%;
+  box-shadow: none;
+  margin: 0.6em auto;
+}
+
+/* ── Code ──────────────────────────────────────────────────────────────────── */
+.reveal code {
+  font-family: 'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
+  background: var(--code-bg);
+  color: var(--gold);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.85em;
+}
+
+.reveal pre {
+  background: var(--code-bg);
+  border: 1px solid rgba(46,184,200,0.25);
+  border-radius: 8px;
+  padding: 0.8em 1.2em;
+  font-size: 0.72em;
+  line-height: 1.5;
+  width: 92%;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  margin: 0.6em auto;
+  /* Wrap long lines instead of clipping them */
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.reveal pre code {
+  background: transparent;
+  color: var(--cream);
+  padding: 0;
+  border-radius: 0;
+}
+
+/* ── Small / captions ──────────────────────────────────────────────────────── */
+.reveal small,
+.reveal .small {
+  font-size: 0.52em;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.3em;
+}
+
+/* ── Links ─────────────────────────────────────────────────────────────────── */
+.reveal a {
+  color: var(--teal);
+  text-decoration: none;
+}
+.reveal a:hover {
+  color: var(--gold);
+}
+
+/* ── Images ────────────────────────────────────────────────────────────────── */
+.reveal img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+  margin: 0.5em auto;
+  border: none;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.45);
+}
+
+/* Full-bleed image slides (single image + optional small caption) */
+.reveal .slides section img:only-of-type,
+.reveal .slides section img.full {
+  max-height: 72vh;
+}
+
+/* ── GIF / animated images ─────────────────────────────────────────────────── */
+.reveal img[src$=".gif"] {
+  max-height: 65vh;
+  max-width: 90%;
+}
+
+/* ── Horizontal rule ───────────────────────────────────────────────────────── */
+.reveal hr {
+  border: none;
+  border-top: 1px solid rgba(46,184,200,0.3);
+  margin: 1em auto;
+  width: 80%;
+}
+
+/* ── Progress bar ──────────────────────────────────────────────────────────── */
+.reveal .progress {
+  color: var(--gold);
+  height: 3px;
+}
+
+/* ── Slide number ──────────────────────────────────────────────────────────── */
+.reveal .slide-number {
+  font-size: 0.5em;
+  color: var(--muted);
+  background: transparent;
+}
+
+/* ── Controls ──────────────────────────────────────────────────────────────── */
+.reveal .controls {
+  color: var(--gold);
+}
+
+/* ── Strong / bold ─────────────────────────────────────────────────────────── */
+.reveal strong {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ── Subtle section separator accent ──────────────────────────────────────── */
+.reveal .slides section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal) 0%, var(--gold) 100%);
+  opacity: 0.6;
+}
+
+/* ── Thisworkz logo (title slide) ─────────────────────────────────────────── */
+.reveal img.tw-logo {
+  /* wide wordmark: THIs · workz */
+  width: 260px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  margin: 0 auto 1.4rem;
+  opacity: 0.92;
+}
+
+/* ── Compact slide variant (content-heavy slides) ─────────────────────────── */
+.reveal .slides section.compact {
+  font-size: 0.84em;
+}
+
+/* ── Faded / de-emphasised content ────────────────────────────────────────── */
+.reveal .faded {
+  opacity: 0.4;
+}
+
+/* ── Fragment animations ───────────────────────────────────────────────────── */
+.reveal .fragment {
+  opacity: 0.25;
+}
+.reveal .fragment.visible {
+  opacity: 1;
+}
+
+/* ── Background ────────────────────────────────────────────────────────────── */
+.reveal .slide-background {
+  background: var(--bg-deep);
+}
+
+/* Subtle radial gradient on every slide for depth */
+.reveal .slides section {
+  background: radial-gradient(ellipse at 70% 30%, rgba(27,52,94,0.45) 0%, transparent 70%);
+}

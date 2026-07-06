@@ -1,6 +1,8 @@
+<img src="images/thisworkz-wordmark.svg" class="tw-logo" />
+
 # Context Engineering
 
-#### Thisworkz, Agentic Engineering Session
+#### Agentic Engineering Session
 
 Tim de Klijn, Willem Bressens
 
@@ -91,7 +93,9 @@ System prompt, tool calls?
 
 --
 
-System promts + additional context might differ between version
+### System prompts + additional context might differ between harness versions
+
+![](images/frustration.gif)
 
 ---
 
@@ -111,7 +115,7 @@ Opencode:
 
 ---
 
-### Token Cache
+## Token Cache
 
 Reuse of previously computed KV-cache entries to avoid re-processing unchanged prefix tokens.
 
@@ -135,15 +139,6 @@ Reuse of previously computed KV-cache entries to avoid re-processing unchanged p
 -​--
 description: Explains code with visual diagrams and analogies. Use when explaining how code works, teaching about a codebase, or when the user asks "how does this work?"
 -​--
-
-When explaining code, always include:
-
-1. **Start with an analogy**: Compare the code to something from everyday life
-2. **Draw a diagram**: Use ASCII art to show the flow, structure, or relationships
-3. **Walk through the code**: Explain step-by-step what happens
-4. **Highlight a gotcha**: What's a common mistake or misconception?
-
-Keep explanations conversational. For complex concepts, use multiple analogies.
 ```
 
 <small>https://code.claude.com/docs/en/skills</small>
@@ -158,6 +153,7 @@ Keep explanations conversational. For complex concepts, use multiple analogies.
 
 ---
 
+<!-- .slide: class="compact" -->
 ## Skills vs MCP?
 
 **Skills** — shape *how* the agent behaves. Reusable prompt snippets in your config. Zero setup.
@@ -181,6 +177,8 @@ opencode:
 
 ## Sub Agents
 
+### Split context over multiple agents.
+
 Demo
 
 ---
@@ -192,9 +190,10 @@ Demo
 <small>Someone on LinkedIn</small>
 ---
 
-## Are you in control of your context?
-
-![](images/star_wars.gif)
+<div style="position: relative; display: inline-block; width: 100%;">
+  <img src="images/star_wars.gif" style="height: 85vh; max-width: 100%; object-fit: contain;">
+  <h2 style="position: absolute; top: 0; left: 0; right: 0; margin: 0; padding: 0.2em 0;">Are you in control of your context?</h2>
+</div>
 
 ---
 
